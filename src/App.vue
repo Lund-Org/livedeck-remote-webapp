@@ -1,17 +1,33 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <component v-bind:is="currentPage" v-on:is-loaded="changePage" />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Start from './pages/Start.vue'
+import Login from './pages/Login.vue'
+import Application from './pages/Application.vue'
+import State from './common/state'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    Start,
+    Login,
+    Application
+  },
+  data: () => {
+    return {
+      currentPage: 'Start'
+    }
+  },
+  methods: {
+    changePage () {
+      if (State.token) {
+        this.currentPage = 'Application'
+      } else {
+        this.currentPage = 'Login'
+      }
+    }
   }
 }
 </script>
