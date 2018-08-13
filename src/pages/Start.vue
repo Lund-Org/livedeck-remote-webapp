@@ -20,10 +20,11 @@ export default {
     }
   },
   created: function () {
+    // @todo get from cookie
     setTimeout(() => {
       // State.token = 12
       this.$emit('is-loaded')
-    }, 5000)
+    }, 500)
   }
 }
 </script>
