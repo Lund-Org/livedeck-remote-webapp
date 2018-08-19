@@ -1,5 +1,8 @@
 <template>
-  <component v-bind:is="currentPage" v-on:is-loaded="changePage" v-on:change-vue="changePage" />
+  <div id="page-container">
+    <component v-bind:is="currentPage" v-on:is-loaded="changePage" v-on:change-vue="changePage" />
+    <button class="logout" v-if="isConnected()" @click="logout">Déconnexion</button>
+  </div>
 </template>
 
 <script>
@@ -9,6 +12,7 @@ import Password from './pages/Password.vue'
 import Application from './pages/Application.vue'
 import Register from './pages/Register.vue'
 import State from './common/state'
+import { removeToken } from './common/state'
 
 export default {
   name: 'app',
@@ -37,6 +41,21 @@ export default {
       } else {
         this.currentPage = 'Login'
       }
+    },
+    /**
+     * Check if the user is connected
+     * @return {boolean}
+     */
+    isConnected () {
+      return (State.token !== null)
+    },
+    /**
+     * Check if the user is connected
+     * @return {boolean}
+     */
+    logout () {
+      removeToken()
+      this.currentPage = 'Login'
     }
   }
 }

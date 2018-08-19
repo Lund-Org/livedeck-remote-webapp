@@ -7,7 +7,7 @@
 
 <script>
 import Loader from '../components/Loader.vue'
-// import State from '../common/state'
+import { initialize } from '../common/state'
 
 export default {
   name: 'start',
@@ -20,11 +20,9 @@ export default {
     }
   },
   created: function () {
-    // @todo get from cookie
-    setTimeout(() => {
-      // State.token = 12
+    initialize().then(() => {
       this.$emit('is-loaded')
-    }, 500)
+    })
   }
 }
 </script>

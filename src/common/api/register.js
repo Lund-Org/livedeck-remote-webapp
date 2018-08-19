@@ -3,7 +3,7 @@ import loginAPI from './login'
 
 export default function (username, password, vueComponent) {
   vueComponent.error = ''
-  if (!username.length < 4) {
+  if (username.length < 4) {
     vueComponent.error = 'The username needs to be at least 4 characters long'
   }
   if (!password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/)) {
@@ -16,7 +16,7 @@ export default function (username, password, vueComponent) {
   if (vueComponent.error.length !== 0) {
     return
   }
-  request.post('/register', {
+  request.put('/register', {
     username: username,
     password: password
   }).then(() => {

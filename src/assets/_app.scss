@@ -4,10 +4,20 @@
   h1 {
     margin: 0;
     padding: 10px;
+    min-height: 40px;
+    transition: background 1s;
+  }
+
+  .app-container {
+    height: 100%;
+    width: 100%;
   }
 
   .category-wrapper {
     position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: calc(100% - 60px);
 
     .category {
       padding: 0 40px;
@@ -16,6 +26,7 @@
 
     .previous-category, .next-category {
       width: 40px;
+      height: 100%;
       position: absolute;
       top: 0;
       bottom: 0;
@@ -24,6 +35,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      z-index: 2;
 
       &:hover {
         background: #EEE;
@@ -45,12 +57,14 @@
   }
 
   ul {
+    width: 100%;
     list-style-type: none;
     margin: 0;
-    padding: 20px;
+    padding: 0px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    transition: left 1s;
 
     li {
       width: 75px;
@@ -58,7 +72,7 @@
       text-align: center;
       border: 1px solid #EEE;
       border-radius: 20px;
-      margin: 0 5px;
+      margin: 5px;
       cursor: pointer;
 
       &:hover {
@@ -76,6 +90,58 @@
           margin: 0;
         }
       }
+    }
+  }
+
+  ul.previous-bindings {
+    position: absolute;
+    left: -100vw;
+    display: none;
+  }
+  
+  ul.next-bindings {
+    position: absolute;
+    left: 100vw;
+    display: none;
+  }
+
+  // Animation for the slide
+  .binding-transition-active {
+    ul.previous-bindings, ul.next-bindings {
+      display: block;
+    }
+
+    ul.current-bindings {
+      position: absolute;
+      left: 40px;
+    }
+  }
+  .binding-transition-destination {
+    ul.current-bindings.to-the-left {
+      position: absolute;
+      left: 100vw;
+    }
+    ul.current-bindings.to-the-right {
+      position: absolute;
+      left: -100vw;
+    }
+
+    ul.previous-bindings.to-the-left {
+      position: absolute;
+      left: 40px;
+    }
+    ul.previous-bindings.to-the-right {
+      position: absolute;
+      left: -200vw;
+    }
+    
+    ul.next-bindings.to-the-left {
+      position: absolute;
+      left: 200vw;
+    }
+    ul.next-bindings.to-the-right {
+      position: absolute;
+      left: 40px;
     }
   }
 }
