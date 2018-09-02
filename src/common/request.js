@@ -1,5 +1,4 @@
-// @todo : Use env var instead
-const BASE_URL = 'http://localhost:19500'
+import state from './state'
 
 export default {
   /**
@@ -11,7 +10,7 @@ export default {
   put (uri, data, headers = {}) {
     return new Promise((resolve, reject) => {
       let xhr = new XMLHttpRequest()
-      xhr.open('PUT', `${BASE_URL}${uri}`)
+      xhr.open('PUT', `${state.config.serverUrl}${uri}`)
       xhr.setRequestHeader('Content-Type', 'application/json')
       for (let key in headers) {
         xhr.setRequestHeader(key, headers[key])
@@ -41,7 +40,7 @@ export default {
   post (uri, data, headers = {}) {
     return new Promise((resolve, reject) => {
       let xhr = new XMLHttpRequest()
-      xhr.open('POST', `${BASE_URL}${uri}`)
+      xhr.open('POST', `${state.config.serverUrl}${uri}`)
       xhr.setRequestHeader('Content-Type', 'application/json')
       for (let key in headers) {
         xhr.setRequestHeader(key, headers[key])
@@ -70,7 +69,7 @@ export default {
   get (uri, headers = {}) {
     return new Promise((resolve, reject) => {
       let xhr = new XMLHttpRequest()
-      xhr.open('GET', `${BASE_URL}${uri}`)
+      xhr.open('GET', `${state.config.serverUrl}${uri}`)
       xhr.setRequestHeader('Content-Type', 'application/json')
       for (let key in headers) {
         xhr.setRequestHeader(key, headers[key])

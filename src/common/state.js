@@ -3,7 +3,11 @@ import jwt from 'jsonwebtoken'
 import verifyToken from './api/verify-token'
 
 let globalState = {
-  token: null
+  token: null,
+  config: {
+    serverUrl: '',
+    wsServerUrl: ''
+  }
 }
 
 async function initialize () {
@@ -15,6 +19,7 @@ async function initialize () {
         let jwtDecoded = jwt.decode(jwtToken)
         if (jwtDecoded && typeof jwtDecoded.authorization !== 'undefined') {
           globalState.token = jwtDecoded.authorization
+          console.log(globalState.token)
         }
         resolve(true)
       }).catch((err) => {

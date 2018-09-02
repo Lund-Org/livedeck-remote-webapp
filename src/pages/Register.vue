@@ -32,7 +32,6 @@ export default {
   methods: {
     /**
      * Submit trigger to send the form
-     * @todo Put the ajax request in a separated file
      */
     submit () {
       registerAPI(this.username, this.password, this)

@@ -21,6 +21,7 @@
 import getCategories from '../common/api/getCategories'
 import Loader from '../components/Loader.vue'
 import CategoryContent from '../components/CategoryContent.vue'
+import websocketManager from '../common/api/websocketManager'
 
 export default {
   name: 'application',
@@ -42,6 +43,7 @@ export default {
   },
   created: function () {
     getCategories(this)
+    websocketManager.start(this)
   },
   computed: {
     previousBindings () {
@@ -91,12 +93,18 @@ export default {
   },
   methods: {
     slideToTheLeft () {
+      if (this.transitionActive) {
+        return
+      }
       this.transitionActiveCategory = this.transitionActiveCategory - 1 < 0 ? this.categories.length - 1 : this.transitionActiveCategory - 1
       this.initTransition(() => {
         this.toTheLeft = true
       })
     },
     slideToTheRight () {
+      if (this.transitionActive) {
+        return
+      }
       this.transitionActiveCategory = this.transitionActiveCategory + 1 >= this.categories.length ? 0 : this.transitionActiveCategory + 1
       this.initTransition(() => {
         this.toTheRight = true

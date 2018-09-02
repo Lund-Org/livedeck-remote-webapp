@@ -12,8 +12,17 @@
 <script>
 export default {
   name: 'Loader',
-  props: ['toTheLeft', 'toTheRight', 'bindings']
-  // todo : Specify the types of props
+  props: {
+    toTheLeft: {
+      type: Boolean
+    },
+    toTheRight: {
+      type: Boolean
+    },
+    bindings: {
+      type: Array
+    }
+  }
 }
 </script>
 

@@ -14,12 +14,10 @@ export default function (username, password, vueComponent) {
       state.token = jwtDecoded.authorization
       saveToken(response.token, state.token)
     }
-    // @todo Connection to the websocket
     vueComponent.$emit('change-vue', {
       vueToLoad: 'Application'
     })
   }).catch((result) => {
-    console.log(result)
     if (result.status === 404) {
       vueComponent.error = 'The authencation failed. Are your credentials right ?'
     } else {
